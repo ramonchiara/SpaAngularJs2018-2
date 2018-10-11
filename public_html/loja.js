@@ -1,16 +1,17 @@
-$(document).ready(function () {
-    console.log("Olá, mundo!");
+var app = angular.module('LojaApp', []);
 
-    $('#preco-min').on('input', function () {
-        var min = $('#preco-min').val();
-        console.log(`preco-min: ${min}`);
-        $('#valor-min').html(min);
+app.controller('PrincipalCtrl', function ($scope, $http) {
+
+    $scope.min = 0;
+    $scope.max = 10000;
+    $scope.produtos = [];
+
+    $http.get('produtos.json').then(function (response) {
+        $scope.produtos = response.data;
     });
 
-    $('#preco-max').on('input', function () {
-        var max = $('#preco-max').val();
-        console.log(`preco-max: ${max}`);
-        $('#valor-max').html(max);
-    });
+    $scope.minmax = function (produto) {
+        return produto.preco >= $scope.min && produto.preco <= $scope.max;
+    }
 
 });
