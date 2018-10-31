@@ -1,0 +1,9 @@
+                    <h2>Produtos</h2>
+                    <ul>
+                        <li ng-repeat="p in produtos| filter: minmax as listaFiltrada">
+                            <a ui-sref="produto({id: {{p.id}}})">{{p.nome}}</a> - {{p.preco| currency}}
+                        </li>
+                        <li ng-if="listaFiltrada.length === 0" class="alert alert-warning" role="alert">
+                            Nenhum produto encontrado!
+                        </li>
+                    </ul>
